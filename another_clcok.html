@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            background-color: yellow;
+        }
+
+        .main-clock {
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .main-clock h1 {
+            font-family: inherit;
+            text-shadow: 0 3px 3px rgb(255, 46, 10);
+            color: rgb(255, 51, 0);
+        }
+
+        .clock {
+            display: flex;
+            justify-content: center;
+            /* border: 2px solid red; */
+            height: 150px;
+            border-radius: 10px;
+            background-color: rgb(255, 255, 0);
+            box-shadow: 1px 1px 1px 2px rgb(255, 51, 0);
+        }
+
+        .inner-clock {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            margin: 15px;
+            /* border: 2px solid red; */
+            height: 100px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 4px 4px rgb(255, 51, 0);
+        }
+
+        #text {
+            margin-top: 30px;
+            text-align: center;
+            color: rgb(255, 51, 0);
+            text-shadow: 0 4px 3px rgb(255, 51, 0);
+        }
+
+        #hours,
+        #minutes,
+        #seconds,
+        #ampm {
+            color: rgb(255, 51, 0);
+            text-shadow: 0 4px 3px rgb(255, 51, 0);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-clock">
+        <h1>Digital Clock</h1>
+        <div class="clock">
+            <div class="inner-clock">
+                <span id="hours">00</span>
+                <span id="text">hours</span>
+            </div>
+            <div class="inner-clock">
+                <span id="minutes">00</span>
+                <span id="text">minutes</span>
+            </div>
+            <div class="inner-clock">
+                <span id="seconds">00</span>
+                <span id="text">seconds</span>
+            </div>
+            <div class="inner-clock">
+                <span id="ampm">AM</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        let hourEl = document.getElementById("hours")
+        let minuteEl = document.getElementById("minutes")
+        let secondEl = document.getElementById("seconds")
+        let ampmEl = document.getElementById("ampm")
+        function updateclock() {
+            let hours = new Date().getHours()
+            let minutes = new Date().getMinutes()
+            let seconds = new Date().getSeconds()
+            let ampm = "AM"
+            if (hours > 12) {
+                hours = hours - 12
+                ampm = "PM"
+            }
+            hours = hours < 10 ? '0' + hours : hours
+            minutes = minutes < 10 ? '0' + minutes : minutes
+            seconds = seconds < 10 ? '0' + seconds : seconds
+            hourEl.innerText = hours
+            minuteEl.innerText = minutes
+            secondEl.innerText = seconds
+            ampmEl.innerText = ampm
+            setTimeout(() => {
+                updateclock()
+            }, 1000)
+        }
+        updateclock()
+
+    </script>
+</body>
+
+</html>
